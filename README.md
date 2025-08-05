@@ -97,6 +97,64 @@ Contributions, issues, and feature requests are welcome!
 Feel free to fork the repo and submit a pull request.
 
 ---
+Perfect! Here’s the section you can **copy and paste directly into your `README.md`** under a heading like `📦 Database Setup` or `🛠️ How to Create the Database`.
+
+---
+
+## 🛠️ Database Setup (MySQL)
+
+Follow the steps below to create the required database and tables for the **YouthVoice** application.
+
+### 🔸 Create Database and Tables
+
+```sql
+-- Step 1: Create the database
+CREATE DATABASE IF NOT EXISTS youthvoice;
+USE youthvoice;
+
+-- Step 2: Create 'youth' table
+CREATE TABLE youth (
+    contactId INT PRIMARY KEY,
+    name VARCHAR(100),
+    age INT,
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(100)
+);
+
+-- Step 3: Create 'government' table
+CREATE TABLE government (
+    contactId INT PRIMARY KEY,
+    name VARCHAR(100),
+    department VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(100)
+);
+
+-- Step 4: Create 'policies' table
+CREATE TABLE policies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200),
+    description TEXT,
+    publishDate DATE
+);
+
+-- Step 5: Create 'feedback' table
+CREATE TABLE feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    youthContactId INT,
+    policyId INT,
+    feedbackText TEXT,
+    date DATE,
+    FOREIGN KEY (youthContactId) REFERENCES youth(contactId),
+    FOREIGN KEY (policyId) REFERENCES policies(id)
+);
+```
+
+> ⚠️ Make sure to update your `application.properties` (or `application.yml`) file with your MySQL credentials and the `youthvoice` database name.
+
+---
+
+Let me know if you'd like me to generate a full `README.md` file for download or include sample data too.
 
 
 
